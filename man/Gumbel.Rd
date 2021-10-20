@@ -2,14 +2,16 @@
 % Please edit documentation in R/DEEVD.R
 \name{Gumbel}
 \alias{Gumbel}
-\title{Estimated Density Values by Gumbel kernel}
+\title{Estimate Density Values by Gumbel kernel}
 \usage{
-Gumbel(y, k, h)
+Gumbel(x = NULL, y, k = NULL, h = NULL)
 }
 \arguments{
+\item{x}{scheme for generating grid points}
+
 \item{y}{a numeric vector of positive values.}
 
-\item{k}{gird points.}
+\item{k}{gird points}
 
 \item{h}{the bandwidth}
 }
@@ -18,23 +20,53 @@ Gumbel(y, k, h)
         \item{y}{estimated values of density}
 }
 \description{
-Estimated Kernel density values by using Gumbel Kernel.
-}
-\details{
 The Gumbel kernel is developed by Khan and Akbar (2020). They provided evidence that performance of their proposed is better then Weibull kernel especially when data belongs to family of extreme distributions.
 Gumbel Kernel is
 \deqn{K_{Gumbel(x, \sqrt{h})}(j)=\frac{1}{\sqrt{h}}exp-\left( \frac{j-x}{\sqrt{h}} +exp\left( \frac{j-x}{\sqrt{h}}\right) \right)}
 }
+\details{
+In this function, choice of bandwidth, number of grid points and scheme that how these grid points are generated are user based. If any parameter(s) is missing then function used default parameters.
+But at least \code{x} or \code{k} should be specified otherwise \code{NA} will be produced. If \code{x} is missing then function will generate \code{k} grid points between minimum and maximum values of vector. Similarly, if
+\code{k} is missing then function consider it same to length of main vector. In case if \code{h} is missing then function used normal scale rule bandwidth for non-normal data and described in Silverman (1986).
+}
 \examples{
-y <- rexp(100,1)
-h <- 0.79 * IQR(y) * length(y) ^ (-1/5)
-Gumbel(y,200,h)
+#Data can be simulated or real data
+## Number of grid points "k" should be at least equal to the data size.
+### If user define the generating scheme of gridpoints than number of gridpoints should
+####be equal or greater than "k"
+###### otherwise NA will be produduced.
+y <- rexp(100, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 100)
+h <- 2
+den <- Gumbel(x = xx, y = y, k = 200, h = h)
+
+##If scheme for generating gridpoints is unknown
+y <- rexp(50, 1)
+h <- 3
+den <- Gumbel(y = y, k = 90, h = h)
+
+##If user do not mention the number of grid points
+y <- rexp(23, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 90)
+
+\dontrun{
+#any bandwidth can be used
+require(KernSmooth)
+h <- dpik(y)   #Direct Plug-In Bandwidth
+den <- Gumbel(x = xx, y = y, h = h)
+}
+
+#if bandwidth is missing
+y <- rexp(100, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 100)
+den <- Gumbel(x = xx, y = y, k = 90)
+
 }
 \references{
-Khan, J. A.; Akbar, A. Density Estimation by Gumbel Kernel. 2020. \emph{Working paper,  Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan.}
+Khan, J. A., & Akbar, A. 2021. Density Estimation Using Gumbel Kernel Estimator. \emph{Open Journal of Statistics} \strong{11} (2), 319-328.
 }
 \seealso{
-For esitimated values by Weibull kernel see \code{\link{Weibull}}. Further, for plot and MSE by Gumbel kernel see \code{\link{plot.Gumbel}} and \code{\link{msegumbel}}, respectively.
+For other kernel see \code{\link{Weibull}}. To plot the density by using Gumbel kernel \code{\link{plot.Gumbel}} and to calculate MSE use \code{\link{mse}}.
 }
 \author{
 Javaria Ahmad Khan, Atif Akbar.

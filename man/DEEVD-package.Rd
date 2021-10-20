@@ -6,7 +6,7 @@
 \alias{DEEVD-package}
 \title{DEEVD}
 \description{
-Weibull and Gumbel kernel related functions are presented. \code{\link{Weibull}} and \code{\link{Gumbel}} present estimated values and \code{\link{plot.Weibull}} and \code{\link{plot.Gumbel}} plot the densities. While \code{\link{mseweibull}} and \code{\link{msegumbel}} calculate the Mean Squared Error (MSE).
+Two extreme value distributions; Weibull and Gumbel kernel related functions are presented. \code{\link{Weibull}} and \code{\link{Gumbel}} present estimated values and \code{\link{plot.Weibull}} and \code{\link{plot.Gumbel}} plot the densities. While mean squared error can be calculated by using \code{\link{mse}}. Further, some related data sets are also presented.
 }
 \details{
 Density Estimation by Extreme Value Distributions
@@ -14,7 +14,7 @@ Density Estimation by Extreme Value Distributions
 \references{
 \itemize{
 \item Salha, R. B., El Shekh Ahmed, H. I., & Alhoubi, I. M. 2014. Hazard Rate Function Estimation Using Weibull Kernel. \emph{Open Journal of Statistics} \strong{4} (08), 650-661.
-\item Khan, J. A.; Akbar, A. Density Estimation by Gumbel Kernel. 2020. \emph{Working paper,  Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan.}
+\item Khan, J. A., & Akbar, A. 2021. Density Estimation Using Gumbel Kernel Estimator. \emph{Open Journal of Statistics} \strong{11} (2), 319-328.
 }
 }
 \seealso{

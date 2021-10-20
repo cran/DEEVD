@@ -15,20 +15,33 @@
 nothing
 }
 \description{
-Plot density by using Gumbel Kernel.
+Plot kernel density by using Gumbel Kernel.
 }
 \examples{
-y <- rexp(100,1)
+y <- rlnorm(100, meanlog = 0, sdlog = 1)
+h <- 1.5
+xx <- seq(min(y) + 0.05, max(y), length = 200)
+den <- Gumbel(x = xx, y = y, k = 200, h = h)
+plot(den, type = "l")
+
+##other details can also be added
+y <- rlnorm(100, meanlog = 0, sdlog = 1)
+grid <- seq(min(y) + 0.05, max(y), length = 200)
 h <- 0.79 * IQR(y) * length(y) ^ (-1/5)
-den <- Gumbel(y,200,h)
-plot(den, type = "s", ylab = "Density Function", lty = 1, xlab = "Time")
+gr <- Gumbel(x = grid, y = y, k = 200, h = h)
+plot(gr, type = "s", ylab = "Density Function", lty = 1, xlab = "Time")
+
+## To add true density along with estimated
+d1 <- density(y, bw = h)
+lines(d1, type = "p", col = "red")
+legend("topright", c("Real Density", "Density by Gumbel Kernel"),
+col=c("red", "black"), lty=c(1,2))
 }
 \references{
-Khan, J. A.; Akbar, A. Density Estimation by Gumbel Kernel. 2020. \emph{Working paper,  Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan.}
+Khan, J. A., & Akbar, A. 2021. Density Estimation Using Gumbel Kernel Estimator. \emph{Open Journal of Statistics} \strong{11} (2), 319-328.
 }
 \seealso{
-For Weibull kernel see \code{\link{plot.Weibull}}. To calculate Gumbel estimated values see \code{\link{Gumbel}} and for
-MSE by using Gumbel Kernel \code{\link{msegumbel}}.
+For Weibull kernel see \code{\link{plot.Weibull}}. To calculate Gumbel estimated values see \code{\link{Gumbel}} and for MSE \code{\link{mse}}.
 }
 \author{
 Javaria Ahmad Khan, Atif Akbar.

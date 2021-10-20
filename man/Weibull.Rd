@@ -4,12 +4,14 @@
 \alias{Weibull}
 \title{Estimated Density Values by Weibull kernel}
 \usage{
-Weibull(y, k, h)
+Weibull(x = NULL, y, k = NULL, h = NULL)
 }
 \arguments{
-\item{y}{a numeric vector of positive values.}
+\item{x}{scheme for generating grid points}
 
-\item{k}{gird points.}
+\item{y}{a numeric vector of positive values}
+
+\item{k}{number of gird points}
 
 \item{h}{the bandwidth}
 }
@@ -18,23 +20,52 @@ Weibull(y, k, h)
         \item{y}{estimated values of density}
 }
 \description{
-Estimated Kernel density values by using Weibull Kernel.
-}
-\details{
 The Weibull kernel is developed by Salha et al. (2014). They used it to nonparametric estimation of the probability density function (pdf) and the hazard rate function for independent and identically distributed (iid) data.
 Weibull Kernel is
 \deqn{ K_w\left( x, \frac{1}{h}\right)(t) =\frac{\Gamma(1+h)}{hx}\left[ \frac{t\Gamma(1+h)}{x}\right] ^{\frac{1}{h}-1} exp\left( -\left( \frac{t\Gamma(1+h)}{x}\right) ^\frac{1}{h}\right)}
 }
+\details{
+see the details in the \code{\link{Gumbel}}
+}
 \examples{
-y <- rexp(100,1)
-h <- 0.79 * IQR(y) * length(y) ^ (-1/5)
-Weibull(y,200,h)
+#Data can be simulated or real data
+## Number of grid points "k" should be at least equal to the data size.
+### If user define the generating scheme of gridpoints than number of gridpoints should
+####be equal or greater than "k"
+##### otherwise NA will be produduced.
+y <- rexp(100, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 100)
+h <- 2
+den <- Weibull(x = xx, y = y, k = 200, h = h)
+
+##If scheme for generating gridpoints is unknown
+y <- rexp(50, 1)
+h <- 3
+den <- Weibull(y = y, k = 90, h = h)
+
+##If user do not mention the number of grid points
+y <- rexp(23, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 90)
+
+\dontrun{
+#any bandwidth can be used
+require(KernSmooth)
+h <- dpik(y)
+den <- Weibull(x = xx, y = y, h = h)
+}
+
+#if bandwidth is missing
+y <- rexp(100, 1)
+xx <- seq(min(y) + 0.05, max(y), length = 100)
+den <- Weibull(x = xx, y = y, k = 90)
+
 }
 \references{
 Salha, R. B., El Shekh Ahmed, H. I., & Alhoubi, I. M. 2014. Hazard Rate Function Estimation Using Weibull Kernel. \emph{Open Journal of Statistics} \strong{4} (08), 650-661.
+Silverman, B. W. 1986. \emph{Density Estimation}. Chapman & Hall/ CRC, London.
 }
 \seealso{
-For esitimated values by Gumbel kernel see \code{\link{Gumbel}}. Further, for plot and MSE by Weibull kernel see \code{\link{plot.Weibull}} and \code{\link{mseweibull}}, respectively.
+For Gumbel kernel see \code{\link{Gumbel}}. To plot its density see \code{\link{plot.Weibull}} and to calculate MSE \code{\link{mse}}.
 }
 \author{
 Javaria Ahmad Khan, Atif Akbar.
