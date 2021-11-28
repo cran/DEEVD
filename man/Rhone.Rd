@@ -4,7 +4,9 @@
 \name{Rhone}
 \alias{Rhone}
 \title{Flood discharge in per second from Rhone river}
-\format{A vector with 23 observations}
+\format{
+A vector with 23 observations
+}
 \usage{
 Rhone
 }

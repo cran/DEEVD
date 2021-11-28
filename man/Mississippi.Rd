@@ -4,7 +4,9 @@
 \name{Mississippi}
 \alias{Mississippi}
 \title{Flood discharge in per second from Mississippi river}
-\format{A vector with 23 observations}
+\format{
+A vector with 23 observations
+}
 \usage{
 Mississippi
 }

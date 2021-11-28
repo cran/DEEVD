@@ -25,7 +25,7 @@ xx <- seq(min(y) + 0.05, max(y), length = 500)
 h <- 2
 gr <- Gumbel(x = xx, y = y, k = 200, h = h)
 mse(kernel = gr, type = "Exp")
-## if distribution is other than mentioned \\code{type} is used then NaN will be produced.
+## if distribution is other than mentioned \code{type} is used then NaN will be produced.
 \dontrun{
 mse(kernel = gr, type ="Beta")
 }

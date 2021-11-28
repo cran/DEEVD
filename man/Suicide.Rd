@@ -4,7 +4,9 @@
 \name{Suicide}
 \alias{Suicide}
 \title{Data of control patients of Suicide study}
-\format{A vector with 86 observations}
+\format{
+A vector with 86 observations
+}
 \usage{
 Suicide
 }

@@ -32,7 +32,7 @@ see the details in the \code{\link{Gumbel}}
 ## Number of grid points "k" should be at least equal to the data size.
 ### If user define the generating scheme of gridpoints than number of gridpoints should
 ####be equal or greater than "k"
-##### otherwise NA will be produduced.
+##### otherwise NA will be produced.
 y <- rexp(100, 1)
 xx <- seq(min(y) + 0.05, max(y), length = 100)
 h <- 2
